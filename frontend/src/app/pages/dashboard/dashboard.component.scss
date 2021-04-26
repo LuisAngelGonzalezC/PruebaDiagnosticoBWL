@@ -1,0 +1,9 @@
+a {
+    cursor: pointer;
+}
+a:hover {
+    color: rgb(224, 224, 224);
+}
+a:not([href]){
+    color: black;
+}

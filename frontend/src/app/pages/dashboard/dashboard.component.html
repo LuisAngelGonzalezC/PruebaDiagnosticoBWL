@@ -1,0 +1,79 @@
+<div class="row main">
+    <div class="col-12 col-md-10">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card h-100 weather">
+                    <app-wheather [timezone]="timezone"></app-wheather>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card h-100 country">
+                    <app-country [code]="country.code" [nameEs]="country.nameEs"></app-country>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card h-100 pending-tasks">
+                    <div class="card-body">
+                        <h5>Tareas pendientes</h5>
+                        <hr>
+                        <div class="row text-left">
+                            <div class="col">
+                                <ul *ngFor="let task of pendingtasks">
+                                    <li>{{ task }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card h-100 time">
+                    <app-clock [timezone]="timezone"></app-clock>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card h-100 completed-tasks">
+                    <div class="card-body">
+                        <h5>Tareas completadas</h5>
+                        <hr>
+                        <div class="row text-left">
+                            <div class="col">
+                                <ul *ngFor="let task of completedtasks">
+                                    <li>{{ task }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card h-100 timezones">
+                    <app-timezone [code]="country.code" (eventTimezone)="changeTimezone($event)"></app-timezone>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="col-12 col-md-2">
+        <div class="row h-100">
+            <div class="col-12">
+                <div class="card h-100 countries">
+                    <div class="card-body">
+                        <h5>Paises disponibles</h5>
+                        <hr>
+                        <div class="row text-left">
+                            <div class="col">
+                                <ul *ngFor="let countryItem of countries">
+                                    <li><a (click)="changeCountry(countryItem)"><img src="https://flagcdn.com/{{countryItem.code | lowercase }}.svg" width="30"> {{countryItem.nameEs}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

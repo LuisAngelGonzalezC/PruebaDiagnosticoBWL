@@ -1,0 +1,26 @@
+ul {
+    margin-top: 0;
+}
+li {
+    padding-bottom: 0;
+}
+.navbar {
+    padding: 0;
+    background-color: rgb(0, 178, 235);
+}
+.nav-item {
+    font-size:large;
+    font-weight: 400;
+}
+.nav-item > .nav-link, .nav-item > span {
+    padding: 15px;
+}
+.active {
+    background-color: rgb(73, 146, 255);
+}
+.navbar-toggler {
+    margin: 15px;
+}
+.logout {
+    cursor: pointer;
+}

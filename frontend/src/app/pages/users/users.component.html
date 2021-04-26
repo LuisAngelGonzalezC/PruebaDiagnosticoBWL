@@ -1,0 +1,31 @@
+<div class="row main">
+    <div class="col-12">
+        <div class="card h-100 users">
+            <div class="card-body">
+                <h5>Lista de usuarios del sistema</h5>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo electrónico</th>
+                        <th scope="col">Fecha de registro</th>
+                        <th scope="col">Último login</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td scope="row">{{ user.fullname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.created_at }}</td>
+                            <td>{{ user.last_login }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ng-template #null>
+                    <h4 class="text-center pt-4">No hay registros 🤔</h4>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

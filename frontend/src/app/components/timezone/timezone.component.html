@@ -1,0 +1,13 @@
+<div class="card-body">
+    <h5>Zonas horarias disponibles</h5>
+    <hr>
+    <div class="row">
+        <div class="text-left">
+            <div class="col">
+                <ul *ngFor="let zone of timezones">
+                    <li><a (click)="changeTimezone(zone)">{{ zone.name }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
