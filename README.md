@@ -3,10 +3,10 @@
 ## Backend
 
 ### Herramientas utilizadas 🛠️
-1. NodeJS
-2. Express
-3. Sequelize
-4. JsonWebTokens
+- NodeJS
+- Express
+- Sequelize
+- JsonWebTokens
 
 ### Instrucciones 🔧
 1. Entrar a la carpeta backend.
@@ -22,13 +22,13 @@
 ## Frontend
 
 ### Herramientas utilizadas 🛠️
-1. Angular
-2. Bootstrap
-3. MomentJS
-4. Toastr
+- Angular
+- Bootstrap
+- MomentJS
+- Toastr
 
 ### Instrucciones 🔧
-Instalar [Angular CLI]() en dado caso que no se tenga instalado
+Instalar [Angular CLI](https://angular.io/cli) en dado caso que no se tenga instalado
 1. Entrar a la carpeta backend.
 2. Instalar las dependencias de node. npm install
 3. Modificar el archivo src/environments/environments para agregar la dirección del backend
