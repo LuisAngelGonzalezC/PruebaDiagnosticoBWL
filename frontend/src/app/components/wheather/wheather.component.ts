@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { TimezoneModel } from 'src/app/models/timezone';
 import { WeatherModel } from 'src/app/models/weather';
+import { environment } from 'src/environments/environment';
 import { WeatherService } from '../../services/weather.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { WeatherService } from '../../services/weather.service';
   styleUrls: ['./wheather.component.scss']
 })
 
-export class WheatherComponent implements OnInit, OnChanges {
+export class WheatherComponent implements OnChanges {
 
   @Input() timezone: TimezoneModel;
   weather: WeatherModel;
@@ -17,9 +18,6 @@ export class WheatherComponent implements OnInit, OnChanges {
   error: boolean = false;
 
   constructor(private weatherService: WeatherService) { }
-
-  ngOnInit(): void {
-  }
 
   ngOnChanges() {
     this.getWeather();
@@ -29,19 +27,19 @@ export class WheatherComponent implements OnInit, OnChanges {
     this.error = false;
     this.loadingWeather = true;
     this.weather = new WeatherModel();
-    this.weatherService.getByName(this.timezone.zoneName).subscribe({
+    var zoneName: string = (this.timezone == undefined) ? environment.default.city : this.timezone.name;
+    this.weatherService.getByName(zoneName).subscribe({
       next: data => {
         this.weather = {
           temperature: data.current.temp_c,
           text: data.current.condition.text,
           icon: data.current.condition.icon,
         }
-        this.loadingWeather = false;
+        this.loadingWeather = false;        
       },
-      error: error => {
+      error: () => {
         this.error = true;
-        this.loadingWeather = false;
-        console.log(error);       
+        this.loadingWeather = false;    
       }
     });
   }

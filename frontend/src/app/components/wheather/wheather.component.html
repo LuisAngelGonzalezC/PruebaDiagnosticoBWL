@@ -2,7 +2,7 @@
     <h5>Clima</h5>
     <hr>
     <div class="row text-center align-items-center h-100">
-        <span *ngIf="error else weatherTemplate" class="mx-auto phrase mt-3">No hay registro para esa ciudad 😧</span>
+        <span *ngIf="error else weatherTemplate" class="mx-auto phrase mt-4">No hay registro para esa ciudad 😧</span>
         <ng-template #weatherTemplate>
             <div *ngIf="loadingWeather else dataWeatherTemplate" class="spinner-border text-center mx-auto mt-3" role="status"></div>
             <ng-template #dataWeatherTemplate>

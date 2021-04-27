@@ -11,7 +11,7 @@ export class WeatherService {
 
   key_weatherapi: string = environment.key_weatherapi;
 
-  constructor(private http: HttpClient, private timezoneService: TimezoneService) { }
+  constructor(private http: HttpClient) { }
 
   getByName(timezone: string): Observable<any> {
     return this.http.get(`http://api.weatherapi.com/v1/current.json?key=${this.key_weatherapi}&q=${timezone}&aqi=yes`);

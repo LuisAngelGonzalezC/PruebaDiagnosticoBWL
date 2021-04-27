@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CountryService } from 'src/app/services/country.service';
 import { environment } from '../../../environments/environment';
 import { pending, completed } from '../../data/tasks';
-import { CountryService } from 'src/app/services/country.service';
 import { CountryModel } from '../../models/country';
-import { WeatherService } from 'src/app/services/weather.service';
 import { TimezoneModel } from 'src/app/models/timezone';
-import { TimezoneService } from 'src/app/services/timezone.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,10 +21,17 @@ export class DashboardComponent implements OnInit {
   country: CountryModel = new CountryModel();
   
   timezone: TimezoneModel;
-  
-  constructor(private countryService: CountryService, private timezoneService: TimezoneService) { }
+
+  loadingDashboard: boolean;
+
+  constructor(private countryService: CountryService) { }
 
   ngOnInit(): void {
+    this.getContries();
+  }
+
+  getContries(){
+    this.loadingDashboard = true;
     this.code_countries.forEach(code => {
       this.countryService.countryByCodeCountry(code)
       .subscribe({
@@ -39,19 +44,20 @@ export class DashboardComponent implements OnInit {
           this.countries.push(data);
         },
         error: error => {
-          console.log('No se pudo encontrar ningún registro con ese código del país', error);
-        },
-        complete: () => {
-          this.country = this.countries[0];
+          console.log('No se pudo encontrar ningún registro con ese código del país. Error:');
+          console.error(error);
         }
       });
     });
+    setTimeout(() => {
+      this.country = this.countries[0];
+      this.loadingDashboard = false;
+    }, 500);
   }
-
   changeCountry(country: CountryModel){
     this.country = country;    
   }
-  changeTimezone(event) {
-    this.timezone = event;    
+  changeTimezone(event: TimezoneModel) {
+    this.timezone = event;
   }
 }

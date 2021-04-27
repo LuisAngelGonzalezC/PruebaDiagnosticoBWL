@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: true}));
 //
 db.sequelize.sync(
     //Descomentar abajo si es necesario para crear la tabla en la base de datos
-    {force: true}
+    //{force: true}
 );
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);

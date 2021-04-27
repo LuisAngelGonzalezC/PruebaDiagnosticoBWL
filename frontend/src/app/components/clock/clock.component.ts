@@ -1,58 +1,49 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import * as moment from 'moment';
 import { TimezoneModel } from 'src/app/models/timezone';
 import { TimezoneService } from 'src/app/services/timezone.service';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-clock',
   templateUrl: './clock.component.html',
   styleUrls: ['./clock.component.scss']
 })
 
-export class ClockComponent implements OnInit, OnChanges {
+export class ClockComponent implements OnChanges {
   
   @Input() timezone: TimezoneModel;
-  time;
+  time: any;
   timer: any;
-  data;
-  interval;
+  timerLTS: any;
+  interval: any;
+  loadingClock: boolean = false;
+  error: boolean = false;
 
   constructor(private timezoneService: TimezoneService) { }
-  ngOnInit() {
-    this.getTime();
-  }
+  
   ngOnChanges(){
     this.getTime();
   }
+  
   getTime() {
-    if(this.timezone.zoneName == undefined || this.timezone.zoneName == null){
-      this.timezoneService.getByZoneName().subscribe({
-        next: data => {
-          this.time = data.formatted;
-          console.log(data);  
-        },
-        error: error => {
-          console.log('Error en la petición de la zona horaria', error);     
-        },
-        complete: () => {
-          this.setTimer();
-        }
-      });
-    }
-    else{
-      this.timezoneService.getByZoneName(this.timezone.zoneName).subscribe({
-        next: data => {
-          this.time = data.formatted;
-          console.log(data);  
-        },
-        error: error => {
-          console.log('Error en la petición de la zona horaria', error);     
-        },
-        complete: () => {
-          this.setTimer();
-        }
-      });
-    }
+    this.error = false;
+    this.loadingClock = true;
+    var zoneName = (this.timezone == undefined) ? environment.default.zoneName : this.timezone.zoneName;
+    
+    this.timezoneService.getByZoneName(zoneName).subscribe({
+      next: data => {
+        this.time = data.formatted;
+        this.loadingClock = false;
+      },
+      error: error => {
+        console.log('Error en la petición de la zona horaria', error);
+        this.error = true;
+        this.loadingClock = false;    
+      },
+      complete: () => {
+        this.setTimer();
+      }
+    });
   }
   
   setTimer() {
@@ -60,7 +51,7 @@ export class ClockComponent implements OnInit, OnChanges {
     clearInterval(this.interval);
     this.interval = setInterval(() => {
       this.timer = moment(this.timer).add(1, 'second');
-      this.data = moment(this.timer).format('LTS');
+      this.timerLTS = moment(this.timer).format('LTS');
     }, 1000);
   }
 }

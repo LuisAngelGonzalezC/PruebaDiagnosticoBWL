@@ -7,7 +7,12 @@ export const environment = {
   api_url: 'http://localhost:8080/api/',
   key_timezonedb: 'WRMSTCDZY144',
   key_weatherapi: '423f7846d3cf48fbba733657212404',
-  code_countries: ['MX', 'US', 'NZ', 'EC', 'CH']
+  code_countries: ['MX', 'US', 'NZ', 'EC', 'CH'],
+  default: {
+    code_country: 'MX',
+    city: 'Mexico_City',
+    zoneName: 'America/Mexico_City'
+  }
 };
 
 /*

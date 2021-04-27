@@ -2,8 +2,14 @@
     <h5>Hora</h5>
     <hr>
     <div class="row text-center align-items-center h-100 mt-2">
-        <div class="col mx-auto mt-4">
-            <span class="clock">{{ data }}</span>
-        </div>
+        <span *ngIf="error else clockTemplate" class="mx-auto phrase mt-3">No hay registro para esa ciudad 😧</span>
+        <ng-template #clockTemplate>
+            <div *ngIf="loadingClock else dataClockTemplate" class="spinner-border text-center mx-auto mt-3" role="status"></div>
+            <ng-template #dataClockTemplate>
+                <div class="col mx-auto mt-4">
+                    <span class="clock">{{ timerLTS }}</span>
+                </div>
+            </ng-template>
+        </ng-template>
     </div>
 </div>
